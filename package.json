@@ -1,0 +1,18 @@
+{
+  "name": "dss-api",
+  "version": "1.0.0",
+  "description": "api sistem rekomendasi dss",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "Kelompok 02 DSS",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12"
+  }
+}
