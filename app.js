@@ -3,10 +3,6 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config()
 
-//middleware
-app.use(cors());
-
-
 const app = express();
 app.use(express.urlencoded({extended:true}));
 
@@ -22,6 +18,8 @@ try{
     console.log(err);
 }
 
+//middleware
+app.use(cors());
 
 app.use('/menus',menuRoutes);
 app.use('/tags',tagsRoutes);

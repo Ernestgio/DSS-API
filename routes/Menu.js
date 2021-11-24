@@ -68,6 +68,7 @@ router.get('/', async (req,res)=> {
     try{
         const result = await Menu.find();
         res.json(result);
+        console.log(result);
     }catch(err){
         console.log(err)
     }
