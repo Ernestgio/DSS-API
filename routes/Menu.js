@@ -64,7 +64,7 @@ router.get('/:id', async(req,res) => {
 });
 
 // GET all routes
-router.get('/', async (res,res)=> {
+router.get('/', async (req,res)=> {
     try{
         const result = await Menu.find();
         res.json(result);
