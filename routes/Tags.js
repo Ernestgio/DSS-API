@@ -47,7 +47,7 @@ router.put('/:id', async(req,res) => {
 //GET routes
 router.get('/:id', async(req,res) => {
     try{
-        const result = await Menu.findById(req.params.id);
+        const result = await Tags.findById(req.params.id);
     }
     catch(err){
         console.log(err);
@@ -58,7 +58,7 @@ router.get('/:id', async(req,res) => {
 // GET all routes
 router.get('/', async (req,res)=> {
     try{
-        const result = await Menu.find();
+        const result = await Tags.find();
         res.json(result);
     }catch(err){
         console.log(err)
