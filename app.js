@@ -1,6 +1,7 @@
 
 const express = require('express');
 const cors = require('cors');
+const path = require("path");
 require('dotenv').config()
 
 const app = express();
@@ -20,9 +21,13 @@ try{
 
 //middleware
 app.use(cors());
-
+app.use(express.static(path.join(__dirname, "frontend")))
 app.use('/menus',menuRoutes);
 app.use('/tags',tagsRoutes);
+
+app.get("/", function(req, res) {
+    res.sendFile(path.join(__dirname, "frontend", "index.html"))
+})
 
 
 // Init API
