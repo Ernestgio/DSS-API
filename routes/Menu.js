@@ -1,55 +1,64 @@
 const router = require('express').Router();
-
+const _ = require('lodash');
 const mongoose = require('mongoose');
 const Menu = require('../Models/Menu');
 
 
 // Delete routes
-router.delete('/:id', async (req,res) =>{
+router.delete('/', async (req,res) =>{
     try{
-        const result = await Menu.findByIdAndRemove(req.params.id);
+        const result = await Menu.findByIdAndRemove(req.body.id);
+        res.json(result);
+        // res.json(200);
     }
     catch(err){
         console.log(err);
+        res.json(500);
     }
-    res.json(204);
 })
 
 //POST routes
 router.post('/', async (req,res) => {
     try{
+        let tags = (_.isArray(req.body.tags) ? req.body.tags : []);
         const result = await Menu.create(
             {
                 name: req.body.name,
                 imageURL: req.body.imageURL,
                 price: req.body.price,
                 servingSize: req.body.servingSize,
-                tags: req.body.tags 
+                tags: tags
             }
         );
+        res.json(201);
     }
     catch(err){
         console.log(err);
+        res.json(500);
     }
-    res.json(201);
 });
 
 //PUT routes
-router.put('/:id', async(req,res) => {
+router.put('/', async(req,res) => {
     try{
-        const result = await Menu.findByIdAndUpdate(req.body.id,
+        let tags = (_.isArray(req.body.tags) ? req.body.tags : []);
+        const result = await Menu.findByIdAndUpdate(
+            req.body.id,
             {
                 name: req.body.name,
                 imageURL: req.body.imageURL,
                 price: req.body.price,
                 servingSize: req.body.servingSize,
-                tags: req.body.tags
-            });
+                tags: tags
+            } 
+        )
+        console.log(result);
+        res.json(200);
     }
     catch(err){
         console.log(err);
+        res.json(500);
     }
-    res.json(200);
 });
 
 //GET Routes
@@ -60,6 +69,7 @@ router.get('/:id', async(req,res) => {
     }
     catch(err){
         console.log(err);
+        res.json(500);
     }
 });
 
@@ -68,9 +78,9 @@ router.get('/', async (req,res)=> {
     try{
         const result = await Menu.find();
         res.json(result);
-        console.log(result);
     }catch(err){
         console.log(err)
+        res.json(500);
     }
 });
 
